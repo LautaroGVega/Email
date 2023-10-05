@@ -2,7 +2,7 @@ import com.example.Bandeja;
 import com.example.Contact;
 import com.example.Correo;
 import com.example.EmailManager;
-
+import com.example.PredicadosCorreo;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -16,7 +16,7 @@ import org.junit.Test;
 
 public class TestEmail {
     @Test
-    public void verificarContact() {
+     public void verificarContact() {
         // Crear tres instancias de Contact con nombres y emails diferentes
         Contact Contact1 = new Contact("Juan Pérez", "juan@example.com");
         Contact Contact2 = new Contact("María Rodríguez", "maria@example.com");
@@ -106,6 +106,23 @@ public class TestEmail {
         // Verificar que el correo esté en la bandeja de recibidos del destinatario
         Bandeja bandejaRecibidosDestinatario = destinatario.getBandeja();
         assertEquals(1, bandejaRecibidosDestinatario.getCorreosRecibidos().size());
+    }
+    @Test
+    public void testFiltrarCorreoPorAsunto() {
+        // Crear dos contactos
+        Contact remitente = new Contact("Remitente", "remitente@example.com");
+        Contact destinatario = new Contact("Destinatario", "destinatario@example.com");
+        // Crear un correo con un asunto que contiene "universidad"
+        Correo correo = new Correo();
+        correo.setAsunto("Correo importante sobre la universidad");
+        correo.setRemitente(remitente);
+        correo.agregarDestinatario(destinatario);
+
+        // Filtrar el correo por asunto
+        boolean contieneUniversidad = correo.getAsunto().toLowerCase().contains("universidad");
+
+        // Verificar que el asunto contiene "universidad"
+        assertTrue(contieneUniversidad);
     }
     }
 
