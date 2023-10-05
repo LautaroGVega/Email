@@ -2,7 +2,7 @@ import com.example.Bandeja;
 import com.example.Contact;
 import com.example.Correo;
 import com.example.EmailManager;
-import com.example.PredicadosCorreo;
+import com.example.Filtros;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -108,7 +108,7 @@ public class TestEmail {
         assertEquals(1, bandejaRecibidosDestinatario.getCorreosRecibidos().size());
     }
     @Test
-    public void testFiltrarCorreoPorAsunto() {
+    public   void testFiltrarCorreoPorAsunto() {
         // Crear dos contactos
         Contact remitente = new Contact("Remitente", "remitente@example.com");
         Contact destinatario = new Contact("Destinatario", "destinatario@example.com");
