@@ -44,3 +44,4 @@ public class Correo {
         destinatarios.add(destinatario);
     }
 }
+
