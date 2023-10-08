@@ -9,6 +9,7 @@ public class Contact {
         this.nombre = nombre;
         this.email = email;
         this.bandeja = new Bandeja();
+
     }
 
     public String getNombre() {

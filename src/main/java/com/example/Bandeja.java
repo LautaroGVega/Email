@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 public class Bandeja {
     private List<Correo> correosEnviados;
     private List<Correo> correosRecibidos;
+   
 
     public Bandeja() {
         correosEnviados = new ArrayList<>();
@@ -28,4 +29,24 @@ public class Bandeja {
     public void agregarCorreoRecibido(Correo correo) {
         correosRecibidos.add(correo);
     }
+    
+    public List<Correo> filtrarCorreosEnviadosPorAsuntoFacultad() {
+        return Filter.filtrarPorAsuntoFacultad(correosEnviados);
+    }
+    public List<Correo> filtrarCorreosEnviadosPorAsuntoFutbol() {
+        return Filter.filtrarPorAsuntoFutbol(correosEnviados);
+    }
+    public List<Correo> filtrarCorreosEnviadosPorAsuntoTrabajo() {
+        return Filter.filtrarPorAsuntoTrabajo(correosEnviados);
+    }
+    public List<Correo> filtrarCorreosRecibidosPorAsuntoFacultad() {
+        return Filter.filtrarPorAsuntoFacultad(correosRecibidos);
+    }
+    public List<Correo> filtrarCorreosRecibidosPorAsuntoFutbol() {
+        return Filter.filtrarPorAsuntoFutbol(correosRecibidos);
+    }
+    public List<Correo> filtrarCorreosRecibidosPorAsuntoTrabajo() {
+        return Filter.filtrarPorAsuntoTrabajo(correosRecibidos);
+    }
+
 }
