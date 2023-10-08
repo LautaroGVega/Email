@@ -2,7 +2,7 @@ package com.example;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+//import java.util.stream.Collectors;
 
 public class Bandeja {
     private List<Correo> correosEnviados;
@@ -48,5 +48,11 @@ public class Bandeja {
     public List<Correo> filtrarCorreosRecibidosPorAsuntoTrabajo() {
         return Filter.filtrarPorAsuntoTrabajo(correosRecibidos);
     }
-
+    public List<Correo> filtrarCorreosRecibidosPorAsuntoPalabra(Correo correo, String string) {
+        return Filter.filtrarPorAsuntoPalabra(correosRecibidos, string);
+    }
+ public List<Correo> filtrarCorreosEnviadosPorAsuntoPalabra(Correo correo, String string) {
+        return Filter.filtrarPorAsuntoPalabra(correosEnviados, string);
+    }
+    
 }

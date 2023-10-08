@@ -22,4 +22,11 @@ public class Filter {
                 .filter(correo -> correo.getAsunto().toLowerCase().contains("trabajo"))
                 .collect(Collectors.toList());
     }
+    
+    public static List<Correo> filtrarPorAsuntoPalabra(List<Correo> correos, String palabraClave) {
+        return correos.stream()
+                .filter(correo -> correo.getAsunto().toLowerCase().contains(palabraClave.toLowerCase()))
+                .collect(Collectors.toList());
+    }
+    
 }

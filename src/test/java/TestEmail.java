@@ -5,14 +5,14 @@ import com.example.EmailManager;
 import com.example.Filter;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+//import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.junit.Assert;
+//import org.junit.Assert;
 import org.junit.Test;
 
 
@@ -110,7 +110,7 @@ public class TestEmail {
         assertEquals(1, bandejaRecibidosDestinatario.getCorreosRecibidos().size());
     }
     @Test
-    public void testEnviarCorreoConFiltroPorFacultadEnAsunto() {
+    public void testEnviarCorreoConFiltroDentroPorFacultadEnAsunto() {
     EmailManager emailManager = new EmailManager();
     
     // Crear un remitente y destinatario con facultades diferentes
@@ -139,7 +139,7 @@ public class TestEmail {
     assertEquals(0, bandejaEnviadosDestinatario.getCorreosEnviados().size());
 }
 @Test
-public void testEnviarCorreoConFiltroPorFacultadEnAsunto1() {
+public void testEnviarCorreoConFiltroPorFacultadEnAsunto() {
     EmailManager emailManager = new EmailManager();
     
     // Crear un remitente y destinatario con facultades diferentes
@@ -165,6 +165,93 @@ public void testEnviarCorreoConFiltroPorFacultadEnAsunto1() {
 // Assert para confirmar cuántos correos hacen referencia a la facultad
     assertEquals(1, numeroDeCorreosEncontrados);
 }
+@Test
+public void testEnviarCorreoConFiltroPorTrabajoEnAsunto() {
+    EmailManager emailManager = new EmailManager();
+    
+    // Crear un remitente y destinatario con facultades diferentes
+    Contact remitente = new Contact("Remitente", "remitente@example.com");
+    Contact destinatario = new Contact("Destinatario", "destinatario@example.com");
+    
+    Correo correo = new Correo();
+    correo.setRemitente(remitente);
+    correo.agregarDestinatario(destinatario);
+    correo.setAsunto("Asunto del correo para Trabajo"); // Asunto que hace referencia a la facultad
+    
+    emailManager.enviarCorreo(correo);
+
+    // Verificar que el correo esté en la bandeja de enviados del remitente
+    Bandeja bandejaEnviadosRemitente = remitente.getBandeja();
+    
+    // Filtrar los correos enviados por asunto "Facultad"
+    List<Correo> correosFiltrados = bandejaEnviadosRemitente.filtrarCorreosEnviadosPorAsuntoTrabajo();
+    
+// Obtener el número de correos encontrados
+    int numeroDeCorreosEncontrados = correosFiltrados.size();
+    
+// Assert para confirmar cuántos correos hacen referencia a la facultad
+    assertEquals(1, numeroDeCorreosEncontrados);
+}
+@Test
+public void testEnviarCorreoConFiltroPorFutbolEnAsunto() {
+    EmailManager emailManager = new EmailManager();
+    
+    // Crear un remitente y destinatario con facultades diferentes
+    Contact remitente = new Contact("Remitente", "remitente@example.com");
+    Contact destinatario = new Contact("Destinatario", "destinatario@example.com");
+    
+    Correo correo = new Correo();
+    correo.setRemitente(remitente);
+    correo.agregarDestinatario(destinatario);
+    correo.setAsunto("Asunto del correo para Futbol"); // Asunto que hace referencia a la facultad
+    
+    emailManager.enviarCorreo(correo);
+
+    // Verificar que el correo esté en la bandeja de enviados del remitente
+    Bandeja bandejaEnviadosRemitente = remitente.getBandeja();
+    
+    // Filtrar los correos enviados por asunto "Facultad"
+    List<Correo> correosFiltrados = bandejaEnviadosRemitente.filtrarCorreosEnviadosPorAsuntoFutbol();
+    
+// Obtener el número de correos encontrados
+    int numeroDeCorreosEncontrados = correosFiltrados.size();
+    
+// Assert para confirmar cuántos correos hacen referencia a la facultad
+    assertEquals(1, numeroDeCorreosEncontrados);
+}
+
+@Test
+public void testEnviarCorreoConFiltroPorAsuntos() {
+    EmailManager emailManager = new EmailManager();
+    
+    // Crear un remitente y destinatario con facultades diferentes
+    Contact remitente = new Contact("Remitente", "remitente@example.com");
+    Contact destinatario = new Contact("Destinatario", "destinatario@example.com");
+    
+    Correo correo = new Correo();
+    correo.setRemitente(remitente);
+    correo.agregarDestinatario(destinatario);
+    correo.setAsunto("messi"); // Asunto que hace referencia a la facultad
+    
+    emailManager.enviarCorreo(correo);
+
+    // Verificar que el correo esté en la bandeja de enviados del remitente
+    Bandeja bandejaRecibidosRemitente = destinatario.getBandeja();
+    Bandeja bandejaEnviadosRemitente = remitente.getBandeja();
+
+    List<Correo> correosFiltrados = bandejaRecibidosRemitente.filtrarCorreosRecibidosPorAsuntoPalabra(correo, "messi");
+    List<Correo> correosFiltrados1 = bandejaEnviadosRemitente.filtrarCorreosEnviadosPorAsuntoPalabra(correo, "messi");
+
+    // Obtener el número de correos encontrados
+    int numeroDeCorreosEncontrados = correosFiltrados.size();
+    int numeroDeCorreosEncontrados1 = correosFiltrados1.size();
+    
+    // Assert para confirmar cuántos correos hacen referencia a la facultad
+    assertEquals(1, numeroDeCorreosEncontrados);
+    assertEquals(1, numeroDeCorreosEncontrados1);
+}
+
+
 
 
 
