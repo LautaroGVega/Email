@@ -30,15 +30,9 @@ public class Bandeja {
         correosRecibidos.add(correo);
     }
     
-
-
-
-
-
-
-
-
-
+//asfhiuasiufhasjfsa
+///aspfasfasf
+//asfasfasfasf
 
 
 
@@ -77,17 +71,4 @@ public class Bandeja {
     public List<Correo> filtrarCorreosRecibidosUCP(Correo correo) {
         return Filter.filtrarPorDireccionUCP(correosRecibidos);
     }
-      public List<Correo> filtrarCorreosEnviadosFacultadYTrabajo(Correo correo) {
-        return Filter.filtrarPorAsuntoFacultadYTrabajo(correosEnviados);
-    }
-      public List<Correo> filtrarCorreosEnviadosFacultadYtrabajo(Correo correo) {
-        return Filter.filtrarPorAsuntoFacultadYTrabajo(correosRecibidos);
-    }
-        public List<Correo> filtrarCorreosEnviadosFutbolYMasculino(Correo correo) {
-        return Filter.filtrarPorAsuntoFacultadYTrabajo(correosEnviados);
-    }
-          public List<Correo> filtrarCorreosRecibidosFutbolYMasculino(Correo correo) {
-        return Filter.filtrarPorAsuntoFacultadYTrabajo(correosRecibidos);
-    }
-
 }

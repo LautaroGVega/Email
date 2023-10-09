@@ -34,21 +34,4 @@ public class Filter {
                 .filter(correo -> correo.getRemitente().getEmail().toLowerCase().contains("@ucp.edu.ar"))
                 .collect(Collectors.toList());
     }
-    public static List<Correo> filtrarPorAsuntoFutbolYMasculino(List<Correo> correos) {
-        return correos.stream()
-                .filter(correo -> correo.getAsunto().toLowerCase().contains("futbol"))
-                .filter(correo -> correo.getAsunto().toLowerCase().contains("masculino"))
-                .collect(Collectors.toList());
-    }
-    public static List<Correo> filtrarPorAsuntoFacultadYTrabajo(List<Correo> correos) {
-        return correos.stream()
-                .filter(correo -> correo.getAsunto().toLowerCase().contains("Facultad"))
-                .filter(correo -> correo.getAsunto().toLowerCase().contains("Trabajo"))
-                .collect(Collectors.toList());
-    }
-        
-    
-
-    
-    
 }

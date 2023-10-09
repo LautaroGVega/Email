@@ -1,5 +1,7 @@
 package com.example;
 
+import java.util.List;
+
 public class Contact {
     private String nombre;
     private String email;
@@ -27,4 +29,5 @@ public class Contact {
     public Bandeja getBandeja() {
         return bandeja;
     }
+    
 }
