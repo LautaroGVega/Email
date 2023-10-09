@@ -28,6 +28,11 @@ public class Filter {
                 .filter(correo -> correo.getAsunto().toLowerCase().contains(palabraClave.toLowerCase()))
                 .collect(Collectors.toList());
     }
+     public static List<Correo> filtrarPorAsuntoPalabraEnContenido(List<Correo> correos, String palabraClave) {
+        return correos.stream()
+                .filter(correo -> correo.getContenido().toLowerCase().contains(palabraClave.toLowerCase()))
+                .collect(Collectors.toList());
+    }
     
     public static List<Correo> filtrarPorDireccionUCP(List<Correo> correos) {
         return correos.stream()

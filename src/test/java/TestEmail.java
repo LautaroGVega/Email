@@ -364,6 +364,32 @@ public void testEnviarCorreoConUCP() {
    
 }
 @Test
+public void testEnviarCorreoFilterEnContenido() {
+    EmailManager emailManager = new EmailManager();
+
+    // Crear un remitente y destinatario con facultades diferentes
+    Contact remitente = new Contact("Remitente", "remitente@gmail.com");
+    Contact destinatario = new Contact("Destinatario", "destinatario@gmail.com");
+
+    Correo correo = new Correo();
+    correo.setRemitente(remitente);
+    correo.agregarDestinatario(destinatario);
+    correo.setAsunto("Asunto del Correo para Facultad y estudiar"); // Asunto que hace referencia a la facultad
+    correo.setContenido("hola me gustaria estudiar en la Facultad");
+    
+    emailManager.enviarCorreo(correo);
+
+    // Verificar que el Correo esté en la bandeja de enviados del remitente
+    Bandeja bandejaEnviadosRemitente = remitente.getBandeja();
+
+    // Filtrar los Correos enviados por dirección de remitente y asunto "Facultad"
+    List<Correo> correosFiltrados = Filter.filtrarPorAsuntoPalabraEnContenido(bandejaEnviadosRemitente.getCorreosEnviados(), "estudiar");
+
+    // Assert para confirmar que el Correo cumple ambos criterios
+    assertEquals(1, correosFiltrados.size()); // Debería haber un correo filtrado
+}
+
+@Test
 public void testEnviarCorreoFilterDoble() {
     EmailManager emailManager = new EmailManager();
 
@@ -375,7 +401,8 @@ public void testEnviarCorreoFilterDoble() {
     correo.setRemitente(remitente);
     correo.agregarDestinatario(destinatario);
     correo.setAsunto("Asunto del Correo para Facultad y estudiar"); // Asunto que hace referencia a la facultad
-
+    correo.setContenido("hola me gustaria estudiar en la Facultad");
+    
     emailManager.enviarCorreo(correo);
 
     // Verificar que el Correo esté en la bandeja de enviados del remitente
