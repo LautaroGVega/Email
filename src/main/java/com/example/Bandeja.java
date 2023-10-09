@@ -30,6 +30,23 @@ public class Bandeja {
         correosRecibidos.add(correo);
     }
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     public List<Correo> filtrarCorreosEnviadosPorAsuntoFacultad() {
         return Filter.filtrarPorAsuntoFacultad(correosEnviados);
     }
@@ -51,8 +68,26 @@ public class Bandeja {
     public List<Correo> filtrarCorreosRecibidosPorAsuntoPalabra(Correo correo, String string) {
         return Filter.filtrarPorAsuntoPalabra(correosRecibidos, string);
     }
- public List<Correo> filtrarCorreosEnviadosPorAsuntoPalabra(Correo correo, String string) {
+    public List<Correo> filtrarCorreosEnviadosPorAsuntoPalabra(Correo correo, String string) {
         return Filter.filtrarPorAsuntoPalabra(correosEnviados, string);
     }
-    
+    public List<Correo> filtrarCorreosEnviadosUCP(Correo correo) {
+        return Filter.filtrarPorDireccionUCP(correosEnviados);
+    }
+    public List<Correo> filtrarCorreosRecibidosUCP(Correo correo) {
+        return Filter.filtrarPorDireccionUCP(correosRecibidos);
+    }
+      public List<Correo> filtrarCorreosEnviadosFacultadYTrabajo(Correo correo) {
+        return Filter.filtrarPorAsuntoFacultadYTrabajo(correosEnviados);
+    }
+      public List<Correo> filtrarCorreosEnviadosFacultadYtrabajo(Correo correo) {
+        return Filter.filtrarPorAsuntoFacultadYTrabajo(correosRecibidos);
+    }
+        public List<Correo> filtrarCorreosEnviadosFutbolYMasculino(Correo correo) {
+        return Filter.filtrarPorAsuntoFacultadYTrabajo(correosEnviados);
+    }
+          public List<Correo> filtrarCorreosRecibidosFutbolYMasculino(Correo correo) {
+        return Filter.filtrarPorAsuntoFacultadYTrabajo(correosRecibidos);
+    }
+
 }

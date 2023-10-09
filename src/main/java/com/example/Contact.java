@@ -7,9 +7,13 @@ public class Contact {
 
     public Contact(String nombre, String email) {
         this.nombre = nombre;
-        this.email = email;
+        // Validar que el email contenga el símbolo "@" antes de asignarlo
+        if (email != null && email.contains("@")) {
+            this.email = email;
+        } else {
+            throw new IllegalArgumentException("El email no es válido.");
+        }
         this.bandeja = new Bandeja();
-
     }
 
     public String getNombre() {
