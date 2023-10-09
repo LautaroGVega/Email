@@ -30,45 +30,5 @@ public class Bandeja {
         correosRecibidos.add(correo);
     }
     
-//asfhiuasiufhasjfsa
-///aspfasfasf
-//asfasfasfasf
 
-
-
-
-
-
-
-    
-    public List<Correo> filtrarCorreosEnviadosPorAsuntoFacultad() {
-        return Filter.filtrarPorAsuntoFacultad(correosEnviados);
-    }
-    public List<Correo> filtrarCorreosEnviadosPorAsuntoFutbol() {
-        return Filter.filtrarPorAsuntoFutbol(correosEnviados);
-    }
-    public List<Correo> filtrarCorreosEnviadosPorAsuntoTrabajo() {
-        return Filter.filtrarPorAsuntoTrabajo(correosEnviados);
-    }
-    public List<Correo> filtrarCorreosRecibidosPorAsuntoFacultad() {
-        return Filter.filtrarPorAsuntoFacultad(correosRecibidos);
-    }
-    public List<Correo> filtrarCorreosRecibidosPorAsuntoFutbol() {
-        return Filter.filtrarPorAsuntoFutbol(correosRecibidos);
-    }
-    public List<Correo> filtrarCorreosRecibidosPorAsuntoTrabajo() {
-        return Filter.filtrarPorAsuntoTrabajo(correosRecibidos);
-    }
-    public List<Correo> filtrarCorreosRecibidosPorAsuntoPalabra(Correo correo, String string) {
-        return Filter.filtrarPorAsuntoPalabra(correosRecibidos, string);
-    }
-    public List<Correo> filtrarCorreosEnviadosPorAsuntoPalabra(Correo correo, String string) {
-        return Filter.filtrarPorAsuntoPalabra(correosEnviados, string);
-    }
-    public List<Correo> filtrarCorreosEnviadosUCP(Correo correo) {
-        return Filter.filtrarPorDireccionUCP(correosEnviados);
-    }
-    public List<Correo> filtrarCorreosRecibidosUCP(Correo correo) {
-        return Filter.filtrarPorDireccionUCP(correosRecibidos);
-    }
 }

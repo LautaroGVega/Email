@@ -5,8 +5,8 @@ import com.example.EmailManager;
 import com.example.Filter;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
+//import static org.junit.Assert.assertFalse;
+//import static org.junit.Assert.assertNotEquals;
 //import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -142,12 +142,13 @@ public class TestEmail {
     assertEquals(0, bandejaEnviadosDestinatario.getCorreosEnviados().size());
 }
 @Test
-public void testEnviarCorreoConFiltroPorFacultadEnAsunto() {
+public void testFiltrarPorAsuntoFacultad() {
+ 
     EmailManager EmailManager = new EmailManager();
     
     // Crear un remitente y destinatario con facultades diferentes
-    Contact remitente = new Contact("Remitente", "remitente@example.com");
-    Contact destinatario = new Contact("Destinatario", "destinatario@example.com");
+    Contact remitente = new Contact("Remitente", "remitente@ucp.edu.ar");
+    Contact destinatario = new Contact("Destinatario", "destinatario@gmail.com");
     
     Correo Correo = new Correo();
     Correo.setRemitente(remitente);
@@ -158,15 +159,12 @@ public void testEnviarCorreoConFiltroPorFacultadEnAsunto() {
 
     // Verificar que el Correo esté en la bandeja de enviados del remitente
     Bandeja bandejaEnviadosRemitente = remitente.getBandeja();
-    
-    // Filtrar los Correos enviados por asunto "Facultad"
-    List<Correo> CorreosFiltrados = bandejaEnviadosRemitente.filtrarCorreosEnviadosPorAsuntoFacultad();
-    
-// Obtener el número de Correos encontrados
-    int numeroDeCorreosEncontrados = CorreosFiltrados.size();
-    
-// Assert para confirmar cuántos Correos hacen referencia a la facultad
-    assertEquals(1, numeroDeCorreosEncontrados);
+
+    // Filtrar los correos de Bandeja usando el método de Filter
+    List<Correo> correosFiltrados = Filter.filtrarPorAsuntoFacultad(bandejaEnviadosRemitente.getCorreosEnviados());
+
+    // Verificar que se filtraron los correos correctamente
+    assertEquals(1, correosFiltrados.size()); // Debería haber un correo con asunto "Facultad"
 }
 @Test
 public void testEnviarCorreoConFiltroPorTrabajoEnAsunto() {
@@ -185,15 +183,12 @@ public void testEnviarCorreoConFiltroPorTrabajoEnAsunto() {
 
     // Verificar que el Correo esté en la bandeja de enviados del remitente
     Bandeja bandejaEnviadosRemitente = remitente.getBandeja();
-    
-    // Filtrar los Correos enviados por asunto "Facultad"
-    List<Correo> CorreosFiltrados = bandejaEnviadosRemitente.filtrarCorreosEnviadosPorAsuntoTrabajo();
-    
-// Obtener el número de Correos encontrados
-    int numeroDeCorreosEncontrados = CorreosFiltrados.size();
-    
-// Assert para confirmar cuántos Correos hacen referencia a la facultad
-    assertEquals(1, numeroDeCorreosEncontrados);
+        
+      // Filtrar los correos de Bandeja usando el método de Filter
+    List<Correo> correosFiltrados = Filter.filtrarPorAsuntoTrabajo(bandejaEnviadosRemitente.getCorreosEnviados());
+
+    // Verificar que se filtraron los correos correctamente
+    assertEquals(1, correosFiltrados.size()); // Debería haber un correo con asunto "Facultad"
 }
 @Test
 public void testEnviarCorreoConFiltroPorFutbolEnAsunto() {
@@ -212,15 +207,12 @@ public void testEnviarCorreoConFiltroPorFutbolEnAsunto() {
 
     // Verificar que el Correo esté en la bandeja de enviados del remitente
     Bandeja bandejaEnviadosRemitente = remitente.getBandeja();
-    
-    // Filtrar los Correos enviados por asunto "Facultad"
-    List<Correo> CorreosFiltrados = bandejaEnviadosRemitente.filtrarCorreosEnviadosPorAsuntoFutbol();
-    
-// Obtener el número de Correos encontrados
-    int numeroDeCorreosEncontrados = CorreosFiltrados.size();
-    
-// Assert para confirmar cuántos Correos hacen referencia a la facultad
-    assertEquals(1, numeroDeCorreosEncontrados);
+        
+    // Filtrar los correos de Bandeja usando el método de Filter
+    List<Correo> correosFiltrados = Filter.filtrarPorAsuntoFutbol(bandejaEnviadosRemitente.getCorreosEnviados());
+
+    // Verificar que se filtraron los correos correctamente
+    assertEquals(1, correosFiltrados.size()); // Debería haber un correo con asunto "Facultad"
 }
 
 @Test
@@ -242,16 +234,15 @@ public void testEnviarCorreoConFiltroPorAsuntos() {
     Bandeja bandejaRecibidosRemitente = destinatario.getBandeja();
     Bandeja bandejaEnviadosRemitente = remitente.getBandeja();
 
-    List<Correo> CorreosFiltrados = bandejaRecibidosRemitente.filtrarCorreosRecibidosPorAsuntoPalabra(Correo, "messi");
-    List<Correo> CorreosFiltrados1 = bandejaEnviadosRemitente.filtrarCorreosEnviadosPorAsuntoPalabra(Correo, "messi");
-
-    // Obtener el número de Correos encontrados
-    int numeroDeCorreosEncontrados = CorreosFiltrados.size();
-    int numeroDeCorreosEncontrados1 = CorreosFiltrados1.size();
+     // Filtrar los correos de Bandeja usando el método de Filter
+    List<Correo> correosFiltrados = Filter.filtrarPorAsuntoPalabra(bandejaRecibidosRemitente.getCorreosRecibidos(), "messi");
+    List<Correo> correosFiltrados1 = Filter.filtrarPorAsuntoPalabra(bandejaEnviadosRemitente.getCorreosEnviados(), "messi");
+    // Verificar que se filtraron los correos correctamente
     
     // Assert para confirmar cuántos Correos hacen referencia a la facultad
-    assertEquals(1, numeroDeCorreosEncontrados);
-    assertEquals(1, numeroDeCorreosEncontrados1);
+    assertEquals(1, correosFiltrados.size()); // Debería haber un correo con asunto "Facultad"
+    
+    assertEquals(1, correosFiltrados1.size());
 }
 
 @Test
@@ -294,28 +285,21 @@ public void testEnviarCorreoConFiltroPorAsuntosPlural() {
     Bandeja bandejaRecibidosDestinatario5 = destinatario5.getBandeja();
     Bandeja bandejaRecibidosDestinatario6 = destinatario6.getBandeja();
     
-    List<Correo> CorreosFiltrados1 = bandejaRecibidosDestinatario1.filtrarCorreosRecibidosPorAsuntoPalabra(Correo, "messi");
-    List<Correo> CorreosFiltrados2 = bandejaRecibidosDestinatario2.filtrarCorreosRecibidosPorAsuntoPalabra(Correo, "messi");
-    List<Correo> CorreosFiltrados3 = bandejaRecibidosDestinatario3.filtrarCorreosRecibidosPorAsuntoPalabra(Correo, "messi");
-    List<Correo> CorreosFiltrados4 = bandejaRecibidosDestinatario4.filtrarCorreosRecibidosPorAsuntoPalabra(Correo, "messi");
-    List<Correo> CorreosFiltrados5 = bandejaRecibidosDestinatario5.filtrarCorreosRecibidosPorAsuntoPalabra(Correo, "messi");
-    List<Correo> CorreosFiltrados6 = bandejaRecibidosDestinatario6.filtrarCorreosRecibidosPorAsuntoPalabra(Correo, "messi");
+    List<Correo> correosFiltrados1 = Filter.filtrarPorAsuntoPalabra(bandejaRecibidosDestinatario1.getCorreosRecibidos(), "messi");
+    List<Correo> correosFiltrados2 = Filter.filtrarPorAsuntoPalabra(bandejaRecibidosDestinatario2.getCorreosRecibidos(), "messi");
+    List<Correo> correosFiltrados3 = Filter.filtrarPorAsuntoPalabra(bandejaRecibidosDestinatario3.getCorreosRecibidos(), "messi");
+    List<Correo> correosFiltrados4 = Filter.filtrarPorAsuntoPalabra(bandejaRecibidosDestinatario4.getCorreosRecibidos(), "messi");
+    List<Correo> correosFiltrados5 = Filter.filtrarPorAsuntoPalabra(bandejaRecibidosDestinatario5.getCorreosRecibidos(), "messi");
+    List<Correo> correosFiltrados6 = Filter.filtrarPorAsuntoPalabra(bandejaRecibidosDestinatario6.getCorreosRecibidos(), "messi");
 
-    // Obtener el número de Correos encontrados
-    int numeroDeCorreosEncontrados1 = CorreosFiltrados1.size();
-    int numeroDeCorreosEncontrados2 = CorreosFiltrados2.size();
-    int numeroDeCorreosEncontrados3 = CorreosFiltrados3.size();
-    int numeroDeCorreosEncontrados4 = CorreosFiltrados4.size();
-    int numeroDeCorreosEncontrados5 = CorreosFiltrados5.size();
-    int numeroDeCorreosEncontrados6 = CorreosFiltrados6.size();
-    
     // Assert para confirmar cuántos Correos hacen referencia a la facultad
-    assertEquals(1, numeroDeCorreosEncontrados1);
-    assertEquals(1, numeroDeCorreosEncontrados2);
-    assertEquals(1, numeroDeCorreosEncontrados3);
-    assertEquals(1, numeroDeCorreosEncontrados4);
-    assertEquals(1, numeroDeCorreosEncontrados5);
-    assertEquals(1, numeroDeCorreosEncontrados6);
+    assertEquals(1, correosFiltrados1.size());
+    assertEquals(1, correosFiltrados2.size());
+    assertEquals(1, correosFiltrados3.size());
+    assertEquals(1, correosFiltrados4.size());
+    assertEquals(1, correosFiltrados5.size());
+    assertEquals(1, correosFiltrados6.size());
+
 }
 @Test
 public void testEnviarCorreoConFiltroPorAsuntosFor() {
@@ -345,13 +329,10 @@ public void testEnviarCorreoConFiltroPorAsuntosFor() {
     // Verificar que el Correo esté en las bandejas de recibidos de cada destinatario
     for (Contact destinatario : destinatarios) {
         Bandeja bandejaRecibidosDestinatario = destinatario.getBandeja();
-        List<Correo> CorreosFiltrados = bandejaRecibidosDestinatario.filtrarCorreosRecibidosPorAsuntoPalabra(Correo, "messi");
-        
-        // Obtener el número de Correos encontrados para cada destinatario
-        int numeroDeCorreosEncontrados = CorreosFiltrados.size();
+        List<Correo> correosFiltrados1 = Filter.filtrarPorAsuntoPalabra(bandejaRecibidosDestinatario.getCorreosRecibidos(), "messi");
         
         // Assert para confirmar cuántos Correos hacen referencia a la facultad para cada destinatario
-        assertEquals(1, numeroDeCorreosEncontrados);
+        assertEquals(1, correosFiltrados1.size());
     }
 }
 @Test
@@ -373,14 +354,12 @@ public void testEnviarCorreoConUCP() {
     Bandeja bandejaEnviadosRemitente = remitente.getBandeja();
     Bandeja bandejaEnviadosDestinatario = destinatario.getBandeja();
     // Filtrar los Correos enviados por asunto "Facultad"
-    List<Correo> CorreosFiltrados = bandejaEnviadosRemitente.filtrarCorreosEnviadosUCP(Correo);
-    List<Correo> CorreosFiltrados1 = bandejaEnviadosDestinatario.filtrarCorreosRecibidosUCP(Correo);
-    // Obtener el número de Correos encontrados
-    int numeroDeCorreosEncontrados = CorreosFiltrados.size();
-    int numeroDeCorreosEncontrados1 = CorreosFiltrados1.size();
+    List<Correo> correosFiltrados = Filter.filtrarPorDireccionUCP(bandejaEnviadosDestinatario.getCorreosRecibidos());
+    List<Correo> correosFiltrados1 = Filter.filtrarPorDireccionUCP(bandejaEnviadosRemitente.getCorreosEnviados());
+
     // Assert para confirmar cuántos Correos hacen referencia a la facultad
-    assertEquals(1, numeroDeCorreosEncontrados);
-    assertEquals(1, numeroDeCorreosEncontrados1);
+    assertEquals(1, correosFiltrados.size());
+    assertEquals(1, correosFiltrados1.size());
    
 }
 
