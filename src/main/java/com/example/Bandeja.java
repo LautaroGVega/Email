@@ -8,7 +8,6 @@ public class Bandeja {
     private List<Correo> correosEnviados;
     private List<Correo> correosRecibidos;
    
-
     public Bandeja() {
         correosEnviados = new ArrayList<>();
         correosRecibidos = new ArrayList<>();
