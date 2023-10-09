@@ -353,6 +353,7 @@ public void testEnviarCorreoConUCP() {
     // Verificar que el Correo esté en la bandeja de enviados del remitente
     Bandeja bandejaEnviadosRemitente = remitente.getBandeja();
     Bandeja bandejaEnviadosDestinatario = destinatario.getBandeja();
+    
     // Filtrar los Correos enviados por asunto "Facultad"
     List<Correo> correosFiltrados = Filter.filtrarPorDireccionUCP(bandejaEnviadosDestinatario.getCorreosRecibidos());
     List<Correo> correosFiltrados1 = Filter.filtrarPorDireccionUCP(bandejaEnviadosRemitente.getCorreosEnviados());
@@ -362,6 +363,56 @@ public void testEnviarCorreoConUCP() {
     assertEquals(1, correosFiltrados1.size());
    
 }
+@Test
+public void testEnviarCorreoFilterDoble() {
+    EmailManager emailManager = new EmailManager();
+
+    // Crear un remitente y destinatario con facultades diferentes
+    Contact remitente = new Contact("Remitente", "remitente@gmail.com");
+    Contact destinatario = new Contact("Destinatario", "destinatario@gmail.com");
+
+    Correo correo = new Correo();
+    correo.setRemitente(remitente);
+    correo.agregarDestinatario(destinatario);
+    correo.setAsunto("Asunto del Correo para Facultad y estudiar"); // Asunto que hace referencia a la facultad
+
+    emailManager.enviarCorreo(correo);
+
+    // Verificar que el Correo esté en la bandeja de enviados del remitente
+    Bandeja bandejaEnviadosRemitente = remitente.getBandeja();
+
+    // Filtrar los Correos enviados por dirección de remitente y asunto "Facultad"
+    List<Correo> correosFiltrados = Filter.filtrarPorDireccionYAsunto(bandejaEnviadosRemitente.getCorreosEnviados());
+
+    // Assert para confirmar que el Correo cumple ambos criterios
+    assertEquals(1, correosFiltrados.size()); // Debería haber un correo filtrado
+    assertEquals("Asunto del Correo para Facultad y estudiar", correosFiltrados.get(0).getAsunto());
+}
+@Test
+public void testEnviarCorreoFilterDobleConBuscar() {
+    EmailManager emailManager = new EmailManager();
+
+    // Crear un remitente y destinatario con facultades diferentes
+    Contact remitente = new Contact("Remitente", "remitente@gmail.com");
+    Contact destinatario = new Contact("Destinatario", "destinatario@gmail.com");
+
+    Correo correo = new Correo();
+    correo.setRemitente(remitente);
+    correo.agregarDestinatario(destinatario);
+    correo.setAsunto("Asunto del Correo para Facultad y estudiar"); // Asunto que hace referencia a la facultad
+
+    emailManager.enviarCorreo(correo);
+
+    // Verificar que el Correo esté en la bandeja de enviados del remitente
+    Bandeja bandejaEnviadosRemitente = remitente.getBandeja();
+
+    // Filtrar los Correos enviados por dirección de remitente y asunto "Facultad"
+    List<Correo> correosFiltrados = Filter.filtrarPorDireccionYAsuntoBuscar(bandejaEnviadosRemitente.getCorreosEnviados(), "@gmail.com", "estudiar");
+
+    // Assert para confirmar que el Correo cumple ambos criterios
+    assertEquals(1, correosFiltrados.size()); // Debería haber un correo filtrado
+}
+
 
 
  }

@@ -34,4 +34,17 @@ public class Filter {
                 .filter(correo -> correo.getRemitente().getEmail().toLowerCase().contains("@ucp.edu.ar"))
                 .collect(Collectors.toList());
     }
+    
+    public static List<Correo> filtrarPorDireccionYAsunto(List<Correo> correos) {
+        return correos.stream()
+                .filter(correo -> correo.getRemitente().getEmail().toLowerCase().contains("@gmail.com")
+                        && correo.getAsunto().toLowerCase().contains("estudiar"))
+                .collect(Collectors.toList());
+    }
+    public static List<Correo> filtrarPorDireccionYAsuntoBuscar(List<Correo> correos, String direccion, String palabraClave) {
+        return correos.stream()
+                .filter(correo -> correo.getRemitente().getEmail().toLowerCase().contains(direccion.toLowerCase())
+                        && correo.getAsunto().toLowerCase().contains(palabraClave.toLowerCase()))
+                .collect(Collectors.toList());
+    }
 }
