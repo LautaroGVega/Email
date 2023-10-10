@@ -323,7 +323,7 @@ public void testEnviar100CorreosDesdeRemitenteADestinatario() {
     Bandeja bandejaRecibidosDestinatario = destinatario.getBandeja();
         
     // Verificar que se recibieron los 100 correos correctamente
-    assertEquals(101, bandejaRecibidosDestinatario.getCorreosRecibidos().size()); // Debería haber 100 correos en la bandeja de recibidos del destinatario
+    assertEquals(100, bandejaRecibidosDestinatario.getCorreosRecibidos().size()); // Debería haber 100 correos en la bandeja de recibidos del destinatario
 }
 
 @Test
